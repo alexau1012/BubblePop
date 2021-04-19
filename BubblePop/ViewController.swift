@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct Settings {
+    var name: String?;
+    var gameTime: Float?;
+    var maxNumBubbles: Float?;
+}
+
 class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -38,6 +44,9 @@ class SettingsViewController: UIViewController {
         gameTimeLabel.text = String(Int(gameTimeSlider.value));
         maxNumBubblesSlider.value = 15;
         maxNumBubblesLabel.text = String(Int(maxNumBubblesSlider.value));
+        
+        gameTime = gameTimeSlider.value;
+        maxNumBubbles = maxNumBubblesSlider.value;
     }
 
     @IBAction func nameTextOnChange(_ sender: Any) {
@@ -57,13 +66,31 @@ class SettingsViewController: UIViewController {
     @IBAction func startOnClick(_ sender: Any) {
         performSegue(withIdentifier: "startSegue", sender: nil);
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // Create a variable to send
+        let settings = Settings(name: name, gameTime: gameTime, maxNumBubbles: maxNumBubbles);
+        
+        // Create a new var to store the instance of PlayViewController
+        let destinationVc = segue.destination as? PlayViewController;
+        destinationVc?.settings = settings;
+    }
 }
 
 class PlayViewController: UIViewController {
+    
+    var settings: Settings?;
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print("Hello")
+        if let settings = settings {
+            print("Hello \(settings)")
+        } else {
+            print("settings is nil")
+        }
     }
 
 }
