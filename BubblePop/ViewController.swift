@@ -9,8 +9,8 @@ import UIKit
 
 struct Settings {
     var name: String?;
-    var gameTime: Float?;
-    var maxNumBubbles: Float?;
+    var gameTime: Int?;
+    var maxNumBubbles: Int?;
 }
 
 class HomeViewController: UIViewController {
@@ -34,8 +34,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var start: UIButton!
     
     var name: String?;
-    var gameTime: Float?;
-    var maxNumBubbles: Float?;
+    var gameTime: Int?;
+    var maxNumBubbles: Int?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +45,8 @@ class SettingsViewController: UIViewController {
         maxNumBubblesSlider.value = 15;
         maxNumBubblesLabel.text = String(Int(maxNumBubblesSlider.value));
         
-        gameTime = gameTimeSlider.value;
-        maxNumBubbles = maxNumBubblesSlider.value;
+        gameTime = Int(gameTimeSlider.value);
+        maxNumBubbles = Int(maxNumBubblesSlider.value);
     }
 
     @IBAction func nameTextOnChange(_ sender: Any) {
@@ -54,12 +54,12 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func gameTimeSliderOnChange(_ sender: Any) {
-        gameTime = gameTimeSlider.value;
+        gameTime = Int(gameTimeSlider.value);
         gameTimeLabel.text = String(Int(gameTimeSlider.value));
     }
     
     @IBAction func maxNumBubblesSliderOnChange(_ sender: Any) {
-        maxNumBubbles = maxNumBubblesSlider.value;
+        maxNumBubbles = Int(maxNumBubblesSlider.value);
         maxNumBubblesLabel.text = String(Int(maxNumBubblesSlider.value));
     }
     
@@ -80,6 +80,10 @@ class SettingsViewController: UIViewController {
 
 class PlayViewController: UIViewController {
     
+    @IBOutlet weak var timeLeftLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var highScoreLabel: UILabel!
+    
     var settings: Settings?;
 
     override func viewDidLoad() {
@@ -87,7 +91,11 @@ class PlayViewController: UIViewController {
         // Do any additional setup after loading the view.
         print("Hello")
         if let settings = settings {
-            print("Hello \(settings)")
+            print("\(settings)")
+            
+            if let gameTime = settings.gameTime {
+                timeLeftLabel.text = String(gameTime);
+            }
         } else {
             print("settings is nil")
         }
