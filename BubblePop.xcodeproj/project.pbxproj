@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83301D94263030A400B811B0 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83301D93263030A400B811B0 /* PlayViewController.swift */; };
+		83301D97263030F000B811B0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83301D96263030F000B811B0 /* SettingsViewController.swift */; };
 		FA65134E2622D2EA00F8422C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA65134D2622D2EA00F8422C /* AppDelegate.swift */; };
 		FA6513502622D2EA00F8422C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA65134F2622D2EA00F8422C /* SceneDelegate.swift */; };
 		FA6513522622D2EA00F8422C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6513512622D2EA00F8422C /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		83301D93263030A400B811B0 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		83301D96263030F000B811B0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FA65134A2622D2EA00F8422C /* BubblePop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubblePop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA65134D2622D2EA00F8422C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA65134F2622D2EA00F8422C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				FA6513562622D2EF00F8422C /* Assets.xcassets */,
 				FA6513582622D2EF00F8422C /* LaunchScreen.storyboard */,
 				FA65135B2622D2EF00F8422C /* Info.plist */,
+				83301D93263030A400B811B0 /* PlayViewController.swift */,
+				83301D96263030F000B811B0 /* SettingsViewController.swift */,
 			);
 			path = BubblePop;
 			sourceTree = "<group>";
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83301D94263030A400B811B0 /* PlayViewController.swift in Sources */,
 				FA6513522622D2EA00F8422C /* ViewController.swift in Sources */,
 				FA65134E2622D2EA00F8422C /* AppDelegate.swift in Sources */,
+				83301D97263030F000B811B0 /* SettingsViewController.swift in Sources */,
 				FA6513502622D2EA00F8422C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
