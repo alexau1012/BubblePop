@@ -18,6 +18,8 @@ class PlayViewController: UIViewController {
     var timeLeft: Int?;
     var score: Int = 0;
     var maxNumBubbles: Int?;
+    
+    let childVC = BubblesViewController();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,7 @@ class PlayViewController: UIViewController {
         }
         
         // Start Timer
-//        self.startTimer();
+        self.startTimer();
         
     }
     
@@ -53,6 +55,13 @@ class PlayViewController: UIViewController {
         timer = nil;
     }
     
+    func incrementScore(value: Int) {
+        score = score + value;
+        
+        // Update label
+        scoreLabel.text = String(score);
+    }
+    
     @objc func update() {
         
         // Stop timer and exit update func if timer is at zero
@@ -68,8 +77,11 @@ class PlayViewController: UIViewController {
             self.timeLeftLabel.text = String(timeLeft);
         }
         
-        // Add bubbles
-//        bvc.addBubbles(num: 15);
+        // Add some bubbles
+        childVC.addBubbles(num: 1);
+        
+        // Remove some bubbles
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,6 +99,8 @@ class BubblesViewController: UIViewController {
     var maxNumBubbles: Int?;
     var currentBubbles: [UIButton] = [];
     
+    let parentVC = PlayViewController();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -94,7 +108,7 @@ class BubblesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         
-        let button = createBubble();
+        let button = createBubble(x: 0, y: 0, color: UIColor.red);
         view.addSubview(button);
         print("\(button.frame)")
     }
@@ -106,7 +120,26 @@ class BubblesViewController: UIViewController {
         while bubbleNum > 0 {
             
             // create bubble
-            let newBubble = createBubble();
+            let randX = Int.random(in: 0..<(Int(view.frame.maxX)-50))
+            let randY = Int.random(in: 0..<(Int(view.frame.maxY)-50))
+            
+            // Determine bubble color
+            let color: UIColor;
+            let randPercentage = Int.random(in: 0..<100)
+            
+            if (randPercentage < 40) {
+                color = UIColor.red;
+            } else if (randPercentage < 70) {
+                color = UIColor.systemPink;
+            } else if (randPercentage < 85) {
+                color = UIColor.green;
+            } else if (randPercentage < 95) {
+                color = UIColor.blue;
+            } else {
+                color = UIColor.black;
+            }
+            
+            let newBubble = createBubble(x: randX,y: randY, color: color);
             
             // check with every bubble in currentBubbles to see if there is any overlap
             for currentBubble in currentBubbles {
@@ -128,23 +161,34 @@ class BubblesViewController: UIViewController {
         }
     }
     
-    func createBubble() -> UIButton {
+    func createBubble(x: Int, y: Int, color: UIColor) -> UIButton {
         let bubble = UIButton(type: .custom);
         bubble.frame = CGRect(x: view.frame.maxX-50, y: view.frame.maxY-50, width: 50, height: 50);
         bubble.layer.cornerRadius = 0.5 * bubble.bounds.size.width;
         bubble.clipsToBounds = true;
-        bubble.backgroundColor = UIColor.red;
+        bubble.backgroundColor = color;
         bubble.addTarget(self, action: #selector(self.bubbleOnClick), for: .touchUpInside);
         
         return bubble;
     }
     
-    @objc func bubbleOnClick() {
+    @objc func bubbleOnClick(sender: UIButton) {
         print("Popped bubble!")
         
-        // Increment score
-//        score = score + 1;
-//        scoreLabel.text = String(score);
+        // Increment score based on the bubble's color
+        switch sender.backgroundColor {
+            case UIColor.red:
+                parentVC.incrementScore(value: 1)
+            case UIColor.systemPink:
+                parentVC.incrementScore(value: 2)
+            case UIColor.green:
+                parentVC.incrementScore(value: 5)
+            case UIColor.blue:
+                parentVC.incrementScore(value: 8)
+            case UIColor.black:
+                parentVC.incrementScore(value: 10)
+            default:
+                print("Unrecognised color: \(String(describing: sender.backgroundColor))");
+        }
     }
-    
 }
