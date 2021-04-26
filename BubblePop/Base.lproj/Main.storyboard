@@ -209,13 +209,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="loY-4t-0t9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="753"/>
+            <point key="canvasLocation" x="1761" y="746"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Play View Controller" id="BYZ-38-t0r" customClass="PlayViewController" customModule="BubblePop" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController title="Play View Controller" id="BYZ-38-t0r" customClass="PlayViewController" customModule="BubblePop" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -237,8 +237,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHu-VK-V3Z">
-                                <rect key="frame" x="71" y="134.5" width="10.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHu-VK-V3Z">
+                                <rect key="frame" x="71" y="134.5" width="23" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -255,10 +255,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3T5-TF-dhc">
-                                <rect key="frame" x="20" y="164" width="374" height="698"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qaw-f0-ouL">
+                                <rect key="frame" x="20" y="163" width="374" height="699"/>
                                 <connections>
-                                    <segue destination="oDX-QF-mNa" kind="embed" identifier="" id="Cq7-vz-Tfk"/>
+                                    <segue destination="fAC-cG-LgL" kind="embed" identifier="playSegue" id="fZs-Yf-mC2"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -268,55 +268,63 @@
                             <constraint firstItem="smr-4h-T0X" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="10S-x6-bQz"/>
                             <constraint firstItem="Bm2-ar-dZp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="14l-ek-h1c"/>
                             <constraint firstItem="ZHu-VK-V3Z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="3Ui-dc-7CS"/>
+                            <constraint firstItem="Qaw-f0-ouL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5ja-dp-0Dt"/>
                             <constraint firstItem="ZHu-VK-V3Z" firstAttribute="firstBaseline" secondItem="Zdd-gq-f5N" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="863-6w-6vb"/>
                             <constraint firstItem="smr-4h-T0X" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ap1-SP-dmj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Qaw-f0-ouL" secondAttribute="bottom" id="Ar5-Mp-t3a"/>
                             <constraint firstItem="MPe-gY-aiW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CZW-er-Uz2"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3T5-TF-dhc" secondAttribute="bottom" id="EaD-3c-Eti"/>
+                            <constraint firstItem="Qaw-f0-ouL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="75" id="DF5-ym-sBD"/>
+                            <constraint firstItem="Qaw-f0-ouL" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.780134" id="FlA-YE-dP9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xcc-l4-eQx" secondAttribute="trailing" constant="66" id="Ka2-k3-DiE"/>
                             <constraint firstItem="Zdd-gq-f5N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="Pma-g4-42d"/>
                             <constraint firstItem="MPe-gY-aiW" firstAttribute="firstBaseline" secondItem="smr-4h-T0X" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="QgN-R9-weS"/>
                             <constraint firstItem="Zdd-gq-f5N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="SDn-kB-A5n"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3T5-TF-dhc" secondAttribute="trailing" constant="20" id="XRg-ul-JEn"/>
+                            <constraint firstItem="Qaw-f0-ouL" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.903382" id="WNc-f2-lUX"/>
                             <constraint firstItem="Xcc-l4-eQx" firstAttribute="top" secondItem="Bm2-ar-dZp" secondAttribute="bottom" constant="3" id="YIf-Fl-Ead"/>
-                            <constraint firstItem="3T5-TF-dhc" firstAttribute="top" secondItem="MPe-gY-aiW" secondAttribute="bottom" constant="8.5" id="dmJ-6w-9I0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qaw-f0-ouL" secondAttribute="trailing" constant="20" id="eA1-l1-j9Q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bm2-ar-dZp" secondAttribute="trailing" constant="36" id="hZ9-Xb-JX0"/>
+                            <constraint firstItem="Qaw-f0-ouL" firstAttribute="top" secondItem="MPe-gY-aiW" secondAttribute="bottom" constant="7.5" id="jMs-eY-j9h"/>
                             <constraint firstItem="ZHu-VK-V3Z" firstAttribute="top" secondItem="Zdd-gq-f5N" secondAttribute="bottom" constant="8" symbolic="YES" id="nIp-0w-NPB"/>
-                            <constraint firstItem="3T5-TF-dhc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="oYt-KS-WjZ"/>
-                            <constraint firstItem="3T5-TF-dhc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="76" id="spW-w1-AW1"/>
-                            <constraint firstItem="3T5-TF-dhc" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.779018" id="toF-PI-10G"/>
+                            <constraint firstItem="Qaw-f0-ouL" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="sZ1-om-1v4"/>
                             <constraint firstItem="MPe-gY-aiW" firstAttribute="top" secondItem="smr-4h-T0X" secondAttribute="bottom" constant="3.5" id="wJj-OX-Sd3"/>
+                            <constraint firstItem="Qaw-f0-ouL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="xCx-nC-Jwv"/>
                             <constraint firstItem="ZHu-VK-V3Z" firstAttribute="top" secondItem="Zdd-gq-f5N" secondAttribute="bottom" constant="50" id="zQh-SD-UZm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="x2a-pa-bPS"/>
                     <connections>
-                        <outlet property="highScoreLabel" destination="Xcc-l4-eQx" id="jGh-eq-FX5"/>
-                        <outlet property="scoreLabel" destination="MPe-gY-aiW" id="xUS-Wh-zsG"/>
-                        <outlet property="timeLeftLabel" destination="ZHu-VK-V3Z" id="Rr3-E5-k5S"/>
+                        <outlet property="bubblesView" destination="Qaw-f0-ouL" id="7a4-w1-aQY"/>
+                        <outlet property="highScoreLabel" destination="Xcc-l4-eQx" id="hEO-uC-1eM"/>
+                        <outlet property="scoreLabel" destination="MPe-gY-aiW" id="cd6-Cb-b9h"/>
+                        <outlet property="timeLeftLabel" destination="ZHu-VK-V3Z" id="vh2-4V-ZAR"/>
+                        <segue destination="b8P-2E-jyJ" kind="show" identifier="finishSegue" id="UwH-ra-Klu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2537.68115942029" y="20.758928571428569"/>
+            <point key="canvasLocation" x="2600" y="21"/>
         </scene>
         <!--Bubbles View Controller-->
-        <scene sceneID="wLW-MF-458">
+        <scene sceneID="hpz-PE-7mS">
             <objects>
-                <viewController id="oDX-QF-mNa" customClass="BubblesViewController" customModule="BubblePop" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kld-Du-1D7">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="698"/>
+                <viewController id="fAC-cG-LgL" customClass="BubblesViewController" customModule="BubblePop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9zC-T7-Dvc">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="699"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                        <color key="backgroundColor" systemColor="separatorColor"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cVx-VF-4LW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bF3-Ih-xo5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1745" y="-384"/>
+            <point key="canvasLocation" x="1761" y="-455"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="UwH-ra-Klu"/>
+    </inferredMetricsTieBreakers>
     <resources>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
