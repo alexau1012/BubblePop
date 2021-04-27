@@ -33,8 +33,7 @@ class SettingsViewController: UIViewController {
         gameTime = Int(gameTimeSlider.value);
         maxNumBubbles = Int(maxNumBubblesSlider.value);
     }
-
-    @IBAction func nameTextOnChange(_ sender: Any) {
+    @IBAction func nameTextOnEdit(_ sender: Any) {
         name = nameText.text;
     }
     
@@ -53,7 +52,6 @@ class SettingsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         // Create a variable to send
         let settings = Settings(name: name, gameTime: gameTime, maxNumBubbles: maxNumBubbles);
         

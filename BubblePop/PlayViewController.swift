@@ -11,6 +11,7 @@ protocol gamesControl {
     func updateTimeLeftLabel(value: Int);
     func updateScore(value: Int);
     func showLeaderboard();
+    func updatePlayerName(name: String);
 }
 
 class PlayViewController: UIViewController, gamesControl {
@@ -22,6 +23,7 @@ class PlayViewController: UIViewController, gamesControl {
     @IBOutlet weak var bubblesView: UIView!
     
     var settings: Settings?;
+    var playerName: String = "";
     var score: Int = 0;
     var highScore: Int = 0;
     
@@ -51,6 +53,10 @@ class PlayViewController: UIViewController, gamesControl {
         highScoreLabel.text = String(highScore);
     }
     
+    func updatePlayerName(name: String) {
+        playerName = name;
+    }
+    
     func showLeaderboard() {
         performSegue(withIdentifier: "finishSegue", sender: nil);
     }
@@ -64,7 +70,9 @@ class PlayViewController: UIViewController, gamesControl {
             }
         } else if segue.identifier == "finishSegue" {
             if let highScoreVC = segue.destination as? HighScoreViewController {
-                highScoreVC.score = score;
+                
+                let newScore = nameScore(name: self.playerName, score: self.score)
+                highScoreVC.newScore = newScore;
             }
         }
     }
@@ -86,6 +94,10 @@ class BubblesViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false);
+        
+        if let playerName = settings?.name {
+            self.delegate?.updatePlayerName(name: playerName);
+        }
         
         if let gameTime = settings?.gameTime {
             self.timeLeft = gameTime;
@@ -222,14 +234,19 @@ class BubblesViewController: UIViewController {
         switch sender.backgroundColor {
             case UIColor.red:
                 points = 1;
+                break;
             case UIColor.systemPink:
                 points = 2;
+                break;
             case UIColor.green:
                 points = 5;
+                break;
             case UIColor.blue:
                 points = 8;
+                break;
             case UIColor.black:
                 points = 10;
+                break;
             default:
                 print("Unrecognised color: \(String(describing: sender.backgroundColor))");
         }
