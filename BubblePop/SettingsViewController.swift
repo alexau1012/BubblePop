@@ -25,6 +25,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        start.isEnabled = false;
+        
         gameTimeSlider.value = 60;
         gameTimeLabel.text = String(Int(gameTimeSlider.value));
         maxNumBubblesSlider.value = 15;
@@ -33,8 +35,31 @@ class SettingsViewController: UIViewController {
         gameTime = Int(gameTimeSlider.value);
         maxNumBubbles = Int(maxNumBubblesSlider.value);
     }
-    @IBAction func nameTextOnEdit(_ sender: Any) {
+    
+    @IBAction func textFieldDidChange(_ sender: Any) {
         name = nameText.text;
+        
+        // If name field is empty, disable start button else enable
+        if nameText.text != nil {
+            if let nameTextUnwrapped = nameText.text {
+                if nameTextUnwrapped != "" {
+                    start.isEnabled = true;
+                } else {
+                    start.isEnabled = false;
+                }
+            }
+        } else {
+            start.isEnabled = false;
+        }
+    }
+    
+    func textFieldDidChange(textField: UITextField) {
+        // If text field is empty, disable start button
+        if ((nameText.text?.isEmpty) != nil) {
+            start.isUserInteractionEnabled = false;
+        } else {
+            start.isUserInteractionEnabled = true;
+        }
     }
     
     @IBAction func gameTimeSliderOnChange(_ sender: Any) {

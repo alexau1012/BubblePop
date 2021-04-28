@@ -34,6 +34,9 @@ class HighScoreViewController: UIViewController {
         if let newScoreUnwrapped = newScore {
             self.currentHighScoreList.append(newScoreUnwrapped);
             
+            // Sort by descending order
+            self.currentHighScoreList.sort(by: { $0.score > $1.score });
+            
             // Persist high scores
             let encoder = JSONEncoder();
             if let encoded = try? encoder.encode(self.currentHighScoreList) {

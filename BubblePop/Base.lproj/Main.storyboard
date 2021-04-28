@@ -139,9 +139,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="name2:" destination="7uy-KA-fGe" eventType="editingDidEnd" id="FBk-Hj-odp"/>
-                                    <action selector="name:" destination="7uy-KA-fGe" eventType="editingDidEnd" id="GSP-0o-FAx"/>
-                                    <action selector="nameTextOnEdit:" destination="fGA-bw-biV" eventType="editingChanged" id="sna-Np-P2y"/>
+                                    <action selector="textFieldDidChange:" destination="fGA-bw-biV" eventType="editingChanged" id="uvF-az-SEJ"/>
                                 </connections>
                             </textField>
                         </subviews>

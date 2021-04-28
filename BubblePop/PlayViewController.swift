@@ -108,7 +108,14 @@ class BubblesViewController: UIViewController {
             self.maxNumBubbles = maxNumBubblesUnwrapped;
         }
         
+        // Add some bubbles at the start
+        addBubbles(num: Int.random(in: 0..<15));
+        
         startTimer();
+    }
+    
+    deinit {
+        stopTimer();
     }
     
     func startTimer() {
