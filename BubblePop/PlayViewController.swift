@@ -71,7 +71,7 @@ class PlayViewController: UIViewController, gamesControl {
         } else if segue.identifier == "finishSegue" {
             if let highScoreVC = segue.destination as? HighScoreViewController {
                 
-                let newScore = nameScore(name: self.playerName, score: self.score)
+                let newScore = nameScore(withName: self.playerName, withScore: self.score)
                 highScoreVC.newScore = newScore;
             }
         }

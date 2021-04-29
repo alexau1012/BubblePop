@@ -7,9 +7,14 @@
 
 import UIKit
 
-struct nameScore: Codable {
+class nameScore: Codable {
     let name: String;
     var score: Int;
+    
+    init(withName name: String, withScore score: Int) {
+        self.name = name;
+        self.score = score;
+    }
 }
 
 class HighScoreViewController: UIViewController {
@@ -22,8 +27,8 @@ class HighScoreViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
+        // Do any additional setup after loading the view.
         if let myHighScores = UserDefaults.standard.value(forKey: "myHighScores") as? Data {
             let decoder = JSONDecoder();
             if let myHighScoresDecoded = try? decoder.decode([nameScore].self, from: myHighScores) {
@@ -32,7 +37,18 @@ class HighScoreViewController: UIViewController {
         }
         
         if let newScoreUnwrapped = newScore {
-            self.currentHighScoreList.append(newScoreUnwrapped);
+
+            // If the player of the newScore already exist in the high score list,
+            // check if the newScore's score is higher, if it is, then update, if not, ignore
+            if currentHighScoreList.filter({ $0.name == newScoreUnwrapped.name}).count != 0 {
+                
+                // Update user's prev score if new score is higher
+                currentHighScoreList.first(where: {$0.name == newScoreUnwrapped.name && $0.score < newScoreUnwrapped.score})?.score = newScoreUnwrapped.score;
+            } else {
+                
+                // Add newScore to high score list
+                self.currentHighScoreList.append(newScoreUnwrapped);
+            }
             
             // Sort by descending order
             self.currentHighScoreList.sort(by: { $0.score > $1.score });
