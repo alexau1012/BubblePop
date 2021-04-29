@@ -25,10 +25,21 @@ class PlayViewController: UIViewController, gamesControl {
     var settings: Settings?;
     var playerName: String = "";
     var score: Int = 0;
-    var highScore: Int = 0;
+    var highScore: Int?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let myHighScores = UserDefaults.standard.value(forKey: "myHighScores") as? Data {
+            let decoder = JSONDecoder();
+            if let myHighScoresDecoded = try? decoder.decode([nameScore].self, from: myHighScores) {
+                highScore = myHighScoresDecoded.map({$0.score}).max();
+                
+                if let highScoreUnwrapped = highScore {
+                    updateHighScore(value: highScoreUnwrapped);
+                }
+            }
+        }
     }
     
     func updateTimeLeftLabel(value: Int) {
@@ -41,7 +52,12 @@ class PlayViewController: UIViewController, gamesControl {
         // Update score label
         scoreLabel.text = String(score);
         
-        if score > highScore {
+        // Update high score
+        if let highScoreUnwrapped = highScore {
+            if score > highScoreUnwrapped {
+                updateHighScore(value: score);
+            }
+        } else {
             updateHighScore(value: score);
         }
     }
@@ -50,7 +66,9 @@ class PlayViewController: UIViewController, gamesControl {
         highScore = value;
         
         // Update high score label
-        highScoreLabel.text = String(highScore);
+        if let highScoreUnwrapped = highScore {
+            highScoreLabel.text = String(highScoreUnwrapped);
+        }
     }
     
     func updatePlayerName(name: String) {
@@ -186,7 +204,7 @@ class BubblesViewController: UIViewController {
                 if (randPercentage < 40) {
                     color = UIColor.red;
                 } else if (randPercentage < 70) {
-                    color = UIColor.systemPink;
+                    color = UIColor.magenta;
                 } else if (randPercentage < 85) {
                     color = UIColor.green;
                 } else if (randPercentage < 95) {
@@ -200,8 +218,6 @@ class BubblesViewController: UIViewController {
                 // check with every bubble in currentBubbles to see if there is any overlap
                 for currentBubble in currentBubbles {
                     // Check if bubble overlaps
-                    print(newBubble.frame.origin)
-                    
                     if (currentBubble.frame.intersects(newBubble.frame)) {
                         // Try again by creating a new bubble
                         continue outerLoop;
@@ -242,7 +258,7 @@ class BubblesViewController: UIViewController {
             case UIColor.red:
                 points = 1;
                 break;
-            case UIColor.systemPink:
+            case UIColor.magenta:
                 points = 2;
                 break;
             case UIColor.green:

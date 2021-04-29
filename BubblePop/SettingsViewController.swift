@@ -25,6 +25,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // Disable start button when the page first loads since the name field is empty
         start.isEnabled = false;
         
         gameTimeSlider.value = 60;
