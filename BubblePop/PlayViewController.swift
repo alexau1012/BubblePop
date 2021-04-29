@@ -152,30 +152,30 @@ class BubblesViewController: UIViewController {
     }
     
     @objc func update() {
-
-        // When time is at zero
-        // Stop timer and exit update func if timer is at zero
-        // Remove all bubbles from view
-        if self.timeLeft == 0 {
-            // Stop timer
-            self.stopTimer();
-            
-            // Remove all bubbles from view
-            for currentBubble in currentBubbles {
-                currentBubble.removeFromSuperview();
-            }
-            
-            // Call Segue from Play VC to High Score VC
-            delegate?.showLeaderboard();
-            
-            return;
-        }
-
+        
         // Decrement time left
         if var timeLeft = self.timeLeft {
             timeLeft = timeLeft - 1;
             self.timeLeft = timeLeft;
             delegate?.updateTimeLeftLabel(value: timeLeft);
+        }
+
+        // When time is at zero
+        // Stop timer and exit update func if timer is at zero
+        // Remove all bubbles from view
+        if self.timeLeft == 0 {
+            // Remove all bubbles from view
+            for currentBubble in currentBubbles {
+                currentBubble.removeFromSuperview();
+            }
+            
+            // Stop timer
+            self.stopTimer();
+            
+            // Call Segue from Play VC to High Score VC
+            delegate?.showLeaderboard();
+            
+            return;
         }
         
         // Add some bubbles
