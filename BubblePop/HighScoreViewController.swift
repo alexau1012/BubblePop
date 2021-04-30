@@ -46,23 +46,25 @@ class HighScoreViewController: UIViewController {
 
             // If the player of the newScore already exist in the high score list,
             // check if the newScore's score is higher, if it is, then update, if not, ignore
-            if currentHighScoreList.filter({ $0.name == newScoreUnwrapped.name}).count != 0 {
+            if newScoreUnwrapped.score != 0 {
+                if currentHighScoreList.filter({ $0.name == newScoreUnwrapped.name}).count != 0 {
+                    
+                    // Update user's prev score if new score is higher
+                    currentHighScoreList.first(where: {$0.name == newScoreUnwrapped.name && $0.score < newScoreUnwrapped.score})?.score = newScoreUnwrapped.score;
+                } else {
+                    
+                    // Add newScore to high score list
+                    self.currentHighScoreList.append(newScoreUnwrapped);
+                }
                 
-                // Update user's prev score if new score is higher
-                currentHighScoreList.first(where: {$0.name == newScoreUnwrapped.name && $0.score < newScoreUnwrapped.score})?.score = newScoreUnwrapped.score;
-            } else {
+                // Sort by descending order
+                self.currentHighScoreList.sort(by: { $0.score > $1.score });
                 
-                // Add newScore to high score list
-                self.currentHighScoreList.append(newScoreUnwrapped);
-            }
-            
-            // Sort by descending order
-            self.currentHighScoreList.sort(by: { $0.score > $1.score });
-            
-            // Persist high scores
-            let encoder = JSONEncoder();
-            if let encoded = try? encoder.encode(self.currentHighScoreList) {
-                UserDefaults.standard.set(encoded, forKey: "myHighScores");
+                // Persist high scores
+                let encoder = JSONEncoder();
+                if let encoded = try? encoder.encode(self.currentHighScoreList) {
+                    UserDefaults.standard.set(encoded, forKey: "myHighScores");
+                }
             }
         }
     }
