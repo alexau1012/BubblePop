@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController {
         // If name field is empty, disable start button else enable
         if nameText.text != nil {
             if let nameTextUnwrapped = nameText.text {
-                if nameTextUnwrapped != "" {
+                if nameTextUnwrapped != "" && !nameTextUnwrapped.trimmingCharacters(in: .whitespaces).isEmpty {
                     start.isEnabled = true;
                 } else {
                     start.isEnabled = false;
