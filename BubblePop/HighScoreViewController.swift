@@ -29,6 +29,11 @@ class HighScoreViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        // Hide back button
+        navigationItem.hidesBackButton = true;
+        
+        // Retreive high scores from User Default
         if let myHighScores = UserDefaults.standard.value(forKey: "myHighScores") as? Data {
             let decoder = JSONDecoder();
             if let myHighScoresDecoded = try? decoder.decode([nameScore].self, from: myHighScores) {
@@ -36,6 +41,7 @@ class HighScoreViewController: UIViewController {
             }
         }
         
+        // Add new score to high scores
         if let newScoreUnwrapped = newScore {
 
             // If the player of the newScore already exist in the high score list,
@@ -63,6 +69,7 @@ class HighScoreViewController: UIViewController {
 
 }
 
+// High Scores Table
 extension HighScoreViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentHighScoreList.count;

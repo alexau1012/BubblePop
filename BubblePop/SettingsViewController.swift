@@ -51,6 +51,7 @@ class SettingsViewController: UIViewController {
                 }
             }
         } else {
+            // Disable when the text field is empty
             start.isEnabled = false;
         }
     }

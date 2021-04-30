@@ -30,6 +30,7 @@ class PlayViewController: UIViewController, gamesControl {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get high score from user defaults and display it
         if let myHighScores = UserDefaults.standard.value(forKey: "myHighScores") as? Data {
             let decoder = JSONDecoder();
             if let myHighScoresDecoded = try? decoder.decode([nameScore].self, from: myHighScores) {
@@ -46,6 +47,7 @@ class PlayViewController: UIViewController, gamesControl {
         timeLeftLabel.text = String(value);
     }
     
+    // Update score variable and score label
     func updateScore(value: Int) {
         score = score + value;
 
@@ -62,6 +64,7 @@ class PlayViewController: UIViewController, gamesControl {
         }
     }
     
+    // Update high score variable and high score label
     func updateHighScore(value: Int) {
         highScore = value;
         
@@ -75,6 +78,7 @@ class PlayViewController: UIViewController, gamesControl {
         playerName = name;
     }
     
+    // Navigate to high score page
     func showLeaderboard() {
         performSegue(withIdentifier: "finishSegue", sender: nil);
     }
@@ -82,13 +86,13 @@ class PlayViewController: UIViewController, gamesControl {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "playSegue" {
             if let bubblesVC = segue.destination as? BubblesViewController {
-                //Some property on ChildVC that needs to be set
+                // Some property on bubblesVC that needs to be set
                 bubblesVC.settings = settings;
                 bubblesVC.delegate = self;
             }
         } else if segue.identifier == "finishSegue" {
             if let highScoreVC = segue.destination as? HighScoreViewController {
-                
+                // Some property on highScoreVC that needs to be set
                 let newScore = nameScore(withName: self.playerName, withScore: self.score)
                 highScoreVC.newScore = newScore;
             }
@@ -105,6 +109,8 @@ class BubblesViewController: UIViewController {
     var timer: Timer?;
     var delegate: gamesControl?;
     var lastPoppedBubbleColor: UIColor?;
+    
+    var maxPossibleBubbles: Int = 15;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,8 +133,9 @@ class BubblesViewController: UIViewController {
         }
         
         // Add some bubbles at the start
-        addBubbles(num: Int.random(in: 0..<15));
+        addBubbles(num: Int.random(in: 0..<maxPossibleBubbles));
         
+        // Start game timer
         startTimer();
     }
     
@@ -151,6 +158,7 @@ class BubblesViewController: UIViewController {
         timer = nil;
     }
     
+    // This function runs every second during gameplay
     @objc func update() {
         
         // Decrement time left
@@ -179,10 +187,10 @@ class BubblesViewController: UIViewController {
         }
         
         // Add some bubbles
-        addBubbles(num: Int.random(in: 0..<15));
+        addBubbles(num: Int.random(in: 0..<maxPossibleBubbles));
         
         // Remove some bubbles
-        removeBubbles(num: Int.random(in: 0..<15));
+        removeBubbles(num: Int.random(in: 0..<maxPossibleBubbles));
     }
     
     func addBubbles(num: Int) {
@@ -213,6 +221,7 @@ class BubblesViewController: UIViewController {
                     color = UIColor.black;
                 }
 
+                // Create a new bubble using the determined settings
                 let newBubble = createBubble(x: randX,y: randY, color: color);
 
                 // check with every bubble in currentBubbles to see if there is any overlap
@@ -236,6 +245,8 @@ class BubblesViewController: UIViewController {
         }
     }
 
+    // Create a bubble parsing in the location of the button on the view
+    // and the color
     func createBubble(x: Double, y: Double, color: UIColor) -> UIButton {
         let bubble = UIButton(type: .custom);
         bubble.frame = CGRect(x: x, y: y, width: 50, height: 50);
@@ -247,6 +258,7 @@ class BubblesViewController: UIViewController {
         return bubble;
     }
 
+    // Bubble on click handler
     @objc func bubbleOnClick(sender: UIButton) {
         // Destroy bubble
         sender.removeFromSuperview();
@@ -274,6 +286,7 @@ class BubblesViewController: UIViewController {
                 print("Unrecognised color: \(String(describing: sender.backgroundColor))");
         }
         
+        // If the last popped bubble color is the same, then add x1.5 the score
         if let lastPoppedBubbleColorUnwrapped = lastPoppedBubbleColor {
             if lastPoppedBubbleColorUnwrapped == sender.backgroundColor {
                 points = Int(Double(points) * 1.5);
@@ -286,6 +299,7 @@ class BubblesViewController: UIViewController {
         delegate?.updateScore(value: points)
     }
 
+    // Remove bubbles from the view
     func removeBubbles(num: Int) {
         var bubblesToRemove = num;
 
